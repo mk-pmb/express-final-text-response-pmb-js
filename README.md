@@ -41,7 +41,7 @@ optional keys:
 * `code`: Your HTTP status code, as a number.
   Default: `200` usually.
   `500` if `how` was an Error object with no suitable `code` property.
-* `subType`: What kind of text. Default: `'plain'`,
+* `type`: What kind of text. Default: `'plain'`,
   which will result in `Content-Type: text/plain; charset=UTF-8`.
 
 
@@ -50,7 +50,7 @@ optional keys:
 
 Properties and methods on `finalTextResponse`:
 
-### .cfg(customizations)
+### .customize(customizations)
 
 Return a proxy function for `finalTextResponse` whose config is updated
 with your `customizations`, which should be a dictionary object.
@@ -59,10 +59,10 @@ with your `customizations`, which should be a dictionary object.
 ### .dfCfg
 
 A dictionary object with the default config.
-Do not modify this directly; instead, use `.cfg()` to get
+Do not modify this directly; instead, use `.customize()` to get
 a customized `finalTextResponse`.
 
-* `knownMimeTypes`: A dictionary object for `subType`s that don't fit
+* `knownMimeTypes`: A dictionary object for `type`s that don't fit
   the default template.
 * `endStr`: A string. If non-empty and the message does not end with
   this string already, it is appended.
