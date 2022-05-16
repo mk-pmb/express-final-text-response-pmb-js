@@ -1,0 +1,38 @@
+{ "name": "express-final-text-response-pmb",
+  "version": "0.0.1",
+  "description": "Respond to an express-style web request with a text and finish it.",
+  "keywords": [
+    "express"
+  ],
+
+  "author": "Heidelberg University Library (https://www.ub.uni-heidelberg.de/)",
+  "homepage": "https://github.com/mk-pmb/express-final-text-response-pmb-js/#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mk-pmb/express-final-text-response-pmb-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mk-pmb/express-final-text-response-pmb-js/issues"
+  },
+  "contributors": [
+    "M.K. (https://github.com/mk-pmb)"
+  ],
+
+  "private": false, "license": "MIT",
+
+  "main": "ftr.mjs",
+  "scripts": { "test": "elp && nodemjs test/all.mjs" },
+  "directories": { "test": "test" },
+  "eslintConfig": { "extends": "nodejs-pmb" },
+
+  "dependencies": {},
+  "devDependencies": {
+    "equal-pmb": "^0.1.6",
+    "lib-demo-util-160404": "^0.1.13"
+  },
+  "peerDependencies": {
+  },
+
+
+  "engines": { "npm": ">=7.0.0", "node": ">=16.0.0" }
+}
