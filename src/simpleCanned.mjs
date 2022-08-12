@@ -1,5 +1,7 @@
 // -*- coding: utf-8, tab-width: 2 -*-
 
+import isFunc from 'is-fn';
+
 import installApi from './installApi.mjs';
 
 
@@ -7,8 +9,11 @@ const api = {};
 
 
 const EX = function simpleCannedFinalResponse(ftr, code, text, custom) {
+  if (!(isFunc(ftr) && ftr.simpleCanned)) {
+    throw new TypeError('Argument #1 must be an FTR function.');
+  }
   const f = function cannedReply(req) { ftr(req, f.opt); };
-  f.opt = { type: 'text', ...custom, code, text };
+  f.opt = { ftr, type: 'text', ...custom, code, text };
   installApi(f, api);
   return f;
 };
