@@ -42,6 +42,7 @@ function throwable(sc) {
     text,
     ...other
   } = opt;
+  delete other.ftr;
   delete other.type;
   return Object.assign(new Error(text), throwable.defaultProps, other);
 }
