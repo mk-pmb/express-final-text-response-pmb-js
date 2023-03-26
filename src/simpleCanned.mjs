@@ -20,7 +20,15 @@ const EX = function simpleCannedFinalResponse(ftr, code, text, custom) {
 };
 
 
-function explain(sc, detail) {
+function err2str(e) { return String((e && e.message) || e || ''); }
+
+
+function addReasons(t, r) {
+  return [t].concat(r).map(err2str).filter(Boolean).join(': ');
+}
+
+
+function explain(sc, reasons) {
   let { opt } = sc;
   const {
     ftr,
@@ -31,18 +39,22 @@ function explain(sc, detail) {
   (function maybeExtendGetLike() {
     const t = (getLike || false).text;
     if (!t) { return; }
-    opt = { ...opt, getLike: { ...getLike, text: t + ': ' + detail } };
+    opt = { ...opt, getLike: { ...getLike, text: addReasons(t, reasons) } };
   }());
-  return EX(ftr, code, text + ': ' + detail, opt);
+  return EX(ftr, code, addReasons(text, reasons), opt);
 }
 
 
 function throwable(sc, arg) {
-  if (arg && isStr(arg)) { return throwable(sc, { explain: arg }); }
+  if (arg) {
+    if (isStr(arg) || Array.isArray(arg)) {
+      return throwable(sc, { explain: arg });
+    }
+  }
   const opt = { ...sc.opt, ...arg };
   let msg = opt.text;
   delete opt.text;
-  if (opt.explain) { msg += ': ' + opt.explain; }
+  if (opt.explain) { msg = addReasons(msg, opt.explain); }
   delete opt.explain;
   delete opt.ftr;
   delete opt.type;
