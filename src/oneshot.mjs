@@ -45,11 +45,12 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
 
   let mt = getOwn(cfg.knownMimeTypes, type);
   if (!mt) { mt = ('text/' + type + '; charset=UTF-8'); }
-  const headers = {
+  const headerPairs = Object.entries({
     'Content-Type': mt,
     Location: how.redirTo,
-  };
-  Object.entries(headers).forEach(function sendHeader(ent) {
+    ...how.headers,
+  }).concat(how.headerPairs).filter(Boolean);
+  headerPairs.forEach(function sendHeader(ent) {
     const [k, v] = ent;
     try {
       if (v) { rsp.header(k, v); }
