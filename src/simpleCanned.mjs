@@ -14,7 +14,7 @@ const EX = function simpleCannedFinalResponse(ftr, code, text, custom) {
     throw new TypeError('Argument #1 must be an FTR function.');
   }
   const f = function cannedReply(req) { ftr(req, f.opt); };
-  f.opt = { ftr, type: 'text', ...custom, code, text };
+  f.opt = { ftr, type: 'plain', ...custom, code, text };
   installApi(f, api);
   return f;
 };

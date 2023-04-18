@@ -43,8 +43,17 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
     console.error(EX.name, 'status:', String(errStatus));
   }
 
+  if (type === 'text') {
+    const err = ('Value "text" is invalid for the "type" option.'
+      + ' If you really want Content-Type text/text (rather than text/plain),'
+      + ' you must specify its full form.');
+    throw new Error(err);
+  }
   let mt = getOwn(cfg.knownMimeTypes, type);
   if (!mt) { mt = ('text/' + type + '; charset=UTF-8'); }
+  if (!mt.includes('/')) {
+    throw new Error('Content-Type must contain a slash!');
+  }
   const headerPairs = Object.entries({
     'Content-Type': mt,
     Location: how.redirTo,
