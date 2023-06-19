@@ -4,6 +4,7 @@ const dfCfg = {
 
   knownMimeTypes: {
     json: 'application/json',
+    rss: 'application/rss+xml',
   },
 
   endStr: '\n',
