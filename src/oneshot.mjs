@@ -54,15 +54,14 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
   if (!mt.includes('/')) {
     throw new Error('Content-Type must contain a slash!');
   }
-  const headerPairs = Object.entries({
+  Object.entries({
     'Content-Type': mt,
     Location: how.redirTo,
     ...how.headers,
-  }).concat(how.headerPairs).filter(Boolean);
-  headerPairs.forEach(function sendHeader(ent) {
-    const [k, v] = ent;
+  }).forEach(function sendHeader([k, v]) {
+    if (!v) { return; }
     try {
-      if (v) { rsp.header(k, v); }
+      rsp.header(k, v);
     } catch (errHead) {
       console.error(EX.name, 'Cannot send header:', { k, v, e: errHead });
     }
