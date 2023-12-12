@@ -1,5 +1,5 @@
 { "name": "express-final-text-response-pmb",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Respond to an express-style web request with a text and finish it.",
   "keywords": [
     "express"

@@ -8,6 +8,8 @@ import installApi from './installApi.mjs';
 
 const api = {};
 
+function orf(x) { return x || false; }
+
 
 const EX = function simpleCannedFinalResponse(ftr, code, text, custom) {
   if (!(isFunc(ftr) && ftr.simpleCanned)) {
@@ -37,7 +39,7 @@ function explain(sc, reasons) {
     getLike,
   } = opt;
   (function maybeExtendGetLike() {
-    const t = (getLike || false).text;
+    const t = orf(getLike).text;
     if (!t) { return; }
     opt = { ...opt, getLike: { ...getLike, text: addReasons(t, reasons) } };
   }());
@@ -54,8 +56,15 @@ function throwable(sc, arg) {
   const opt = { ...sc.opt, ...arg };
   let msg = opt.text;
   delete opt.text;
-  if (opt.explain) { msg = addReasons(msg, opt.explain); }
+  const ex = opt.explain;
   delete opt.explain;
+  if (ex) {
+    msg = addReasons(msg, ex);
+    if (orf(opt.getLike).text !== undefined) {
+      const text = addReasons(opt.getLike.text, ex);
+      opt.getLike = { ...opt.getLike, text };
+    }
+  }
   delete opt.ftr;
   delete opt.type;
   return Object.assign(new Error(msg), throwable.defaultProps, opt);
