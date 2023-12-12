@@ -61,7 +61,8 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
   }).forEach(function sendHeader([k, v]) {
     if (!v) { return; }
     try {
-      rsp.header(k, v);
+      // console.debug('oneshot header:', k, v);
+      rsp.header({ [k]: v });
     } catch (errHead) {
       console.error(EX.name, 'Cannot send header:', { k, v, e: errHead });
     }
