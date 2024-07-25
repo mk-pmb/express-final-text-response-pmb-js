@@ -54,6 +54,7 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
   if (!mt.includes('/')) {
     throw new Error('Content-Type must contain a slash!');
   }
+  if (how.links) { rsp.links(how.links); }
   Object.entries({
     'Content-Type': mt,
     Location: how.redirTo,
