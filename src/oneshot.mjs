@@ -69,7 +69,15 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
     }
   });
 
-  rsp.send(text);
+  try {
+    rsp.send(text);
+  } catch (sendErr) {
+    const errStr = String(sendErr);
+    const report = { e: errStr };
+    if (asStr.includes('invalid media type')) { report.effType = type; }
+    console.error(EX.name, 'Cannot send body:', report);
+    throw sendErr;
+  }
   rsp.end();
 };
 
