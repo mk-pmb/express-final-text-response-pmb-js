@@ -5,6 +5,7 @@ import isErr from 'is-error';
 import isStr from 'is-string';
 
 import guessHttpStatusCode from './guessHttpStatusCode.mjs';
+import headersFx from './headersFx.mjs';
 import isGetLikeMethod from './isGetLikeMethod.mjs';
 
 
@@ -55,11 +56,12 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
     throw new Error('Content-Type must contain a slash!');
   }
   if (how.links) { rsp.links(how.links); }
-  Object.entries({
+  const headers = headersFx({
     'Content-Type': mt,
     Location: how.redirTo,
     ...how.headers,
-  }).forEach(function sendHeader([k, v]) {
+  });
+  Object.entries(headers).forEach(function sendHeader([k, v]) {
     if (!v) { return; }
     try {
       // console.debug('oneshot header:', k, v);

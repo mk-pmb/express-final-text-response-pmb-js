@@ -1,5 +1,5 @@
 { "name": "express-final-text-response-pmb",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Respond to an express-style web request with a text and finish it.",
   "keywords": [
     "express"
@@ -27,19 +27,20 @@
 
   "dependencies": {
     "concise-value-preview-pmb": "^0.1.1",
-    "error-details-without-log-spam-pmb": "^1.0.0",
+    "error-details-without-log-spam-pmb": "^1.0.1",
     "getown": "^1.0.0",
     "is-error": "^2.2.2",
     "is-fn": "^2.0.0",
     "is-string": "^1.0.7",
-    "safe-sortedjson": "^1.0.7"
+    "safe-sortedjson": "^1.0.8",
+    "trivial-http-headers": "^0.1.1"
   },
   "devDependencies": {
-    "eslint-config-nodejs-pmb": "^0.3.5",
+    "eslint-config-nodejs-pmb": "^0.3.6",
     "eslint-plugin-json-light-pmb": "^1.0.7",
-    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-n": "^17.10.2",
     "eslint-pretty-pmb": "^1.0.5",
-    "nodemjs": "^0.1.12"
+    "nodemjs": "^0.1.15"
   },
   "peerDependencies": {
   },
