@@ -17,7 +17,7 @@ const EX = {
     p = parameters, usually received from
         handleUnknownError() in `./handleUnknownError.mjs`.
     */
-    const { err } = p;
+    const { err, logRef } = p;
     let t = [];
     const {
       message,
@@ -39,7 +39,9 @@ const EX = {
         }
       }
     }
-    p.req.logCkp('FinTR err:', p.msg, ...t);
+    let { msg } = p;
+    if (logRef) { msg += ' <ref:' + logRef + '>'; }
+    p.req.logCkp('FinTR err:', msg, ...t);
   },
 
 };
