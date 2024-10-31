@@ -1,5 +1,5 @@
 { "name": "express-final-text-response-pmb",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Respond to an express-style web request with a text and finish it.",
   "keywords": [
     "express"
@@ -33,7 +33,8 @@
     "is-fn": "^2.0.0",
     "is-string": "^1.0.7",
     "safe-sortedjson": "^1.0.8",
-    "trivial-http-headers": "^0.1.1"
+    "trivial-http-headers": "^0.1.1",
+    "uuid-random": "^1.3.2"
   },
   "devDependencies": {
     "eslint-config-nodejs-pmb": "^0.3.6",
