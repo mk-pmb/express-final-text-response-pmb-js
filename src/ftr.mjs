@@ -11,7 +11,9 @@ import simpleCanned from './simpleCanned.mjs';
 const api = {
 
   json(ftr, req, data, opt) {
-    const text = sortedJson(data);
+    const text = (opt.sorted === false
+      ? JSON.stringify(data, null, 2)
+      : sortedJson(data));
     return ftr(req, { type: 'json', text, ...opt });
   },
 
