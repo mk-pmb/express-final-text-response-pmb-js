@@ -76,7 +76,7 @@ const EX = function sendFinalTextResponse(cfg, req, how) {
   } catch (sendErr) {
     const errStr = String(sendErr);
     const report = { e: errStr };
-    if (asStr.includes('invalid media type')) { report.effType = type; }
+    if (errStr.includes('invalid media type')) { report.effType = type; }
     console.error(EX.name, 'Cannot send body:', report);
     throw sendErr;
   }
