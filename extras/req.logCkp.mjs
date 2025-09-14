@@ -7,9 +7,15 @@ import preview from 'concise-value-preview-pmb';
 import cleanError from 'error-details-without-log-spam-pmb';
 
 function ellip(s, l) { return s.slice(0, l) + (s.length > l ? '…' : ''); }
+function tameNewlines(s) { return String(s).trim().replace(/[\r\n]\s*/g, '¶ '); }
 
 
 const EX = {
+
+  util: {
+    ellip,
+    tameNewlines,
+  },
 
   logSend(p) { p.req.logCkp('FinTR:', p.code, p.type, preview(p.text)); },
 
@@ -26,16 +32,16 @@ const EX = {
       ...otherDetails
     } = err;
     if (shouldBeTraced === false) {
-      t = [name, message, otherDetails];
+      t = [tameNewlines(name), tameNewlines(message), otherDetails];
     } else {
       const c = cleanError(err);
       t = [c];
-      const msg = String(c.message || '');
+      const msg = tameNewlines(c.message || '');
       if (msg) {
         const stack = String(c.stack || '');
         const lines = stack.split('\n');
         if (lines.length > 10) {
-          t.push('// ' + ellip(msg.trim().replace(/[\r\n]\s*/g, '¶ '), 256));
+          t.push('// ' + ellip(tameNewlines(msg), 256));
         }
       }
     }
